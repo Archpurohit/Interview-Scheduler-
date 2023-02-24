@@ -14,15 +14,13 @@ import Confirm from "components/Appointment/Confirm.js"
 import Status from "components/Appointment/Status.js"
 import Error from "components/Appointment/Error.js"
 import React, { Fragment } from 'react'
-
+import Application from 'components/Application';
 
 
 
 
 storiesOf("Appointment", module)
-  .addParameters({
-    backgrounds: [{ name: "white", value: "#fff", default: true }]
-  })
+  .addParameters({backgrounds: [{ name: "white", value: "#fff", default: true }]})
   .add("Appointment", () => <Appointment />)
   .add("Appointment with Time", () => <Appointment time="12pm" />)
   .add("Header", () => <Header time="12pm" />)
