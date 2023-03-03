@@ -2,7 +2,7 @@ import React from "react";
 import DayList from "./DayList";
 import "components/Application.scss";
 import { useState, useEffect } from "react";
-import Appointment from "./Appointment";
+import { Appointment } from "./Appointment/index.js";
 import axios from 'axios';
 import { getAppointmentsForDay } from "../helpers/selectors";
 import {getInterview} from '../helpers/selectors';
