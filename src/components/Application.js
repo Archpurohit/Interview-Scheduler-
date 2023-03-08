@@ -6,7 +6,7 @@ import { Appointment } from "./Appointment/index.js";
 import axios from 'axios';
 import { getAppointmentsForDay,getInterviewersForDay } from "../helpers/selectors";
 import {getInterview} from '../helpers/selectors';
-
+import useVisualMode from "hooks/useVisualMode";
 
 
 export default function Application(props) {
@@ -53,30 +53,28 @@ export default function Application(props) {
     });
   }, []);
 
-  function bookInterview(id, interview) {
-
+  function bookInterview(id, interview, transition) {
     // send PUT request to update appointment with interview data
     axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
-        // update state with new appointment data
-        const appointment = {
-          ...state.appointments[id],
-          interview: { ...interview }
-        };
-        const appointments = {
-          ...state.appointments,
-          [id]: appointment
-        };
-        setState({
-          ...state,
-          appointments
+        setState((prev) => {
+          const appointment = {
+            ...prev.appointments[id],
+            interview: { ...interview }
+          };
+          const appointments = {
+            ...prev.appointments,
+            [id]: appointment
+          };
+          return {
+            ...prev,
+            appointments
+          }
         });
-
-
+        transition("SHOW");
       })
       .catch((error) => console.log(error));
   }
-
 
 
   return (
@@ -98,7 +96,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-      {schedule}
+      {schedule }
         <Appointment key="last" time="5pm" />
 
       </section>
