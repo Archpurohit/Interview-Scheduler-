@@ -12,6 +12,7 @@ const Appointment = (props) => {
   const SHOW = "SHOW";
   const CREATE = "CREATE";
   const SAVING = "SAVING";
+  // const ERROR_SAVE = "ERROR_SAVE"
   const { mode, transition, back } = useVisualMode(interview ? SHOW : EMPTY);
 
   function save(name, interviewer) {
@@ -19,9 +20,8 @@ const Appointment = (props) => {
       student: name,
       interviewer
     };
-
+    transition(SAVING); // set mode to SAVING
     bookInterview(id, interview)
-    // transition to show
     transition(SHOW)
   }
 

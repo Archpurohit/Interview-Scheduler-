@@ -55,19 +55,29 @@ export default function Application(props) {
 
   function bookInterview(id, interview) {
 
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-    setState({
-      ...state,
-      appointments
-    });
+    // send PUT request to update appointment with interview data
+    axios.put(`/api/appointments/${id}`, { interview })
+      .then(() => {
+        // update state with new appointment data
+        const appointment = {
+          ...state.appointments[id],
+          interview: { ...interview }
+        };
+        const appointments = {
+          ...state.appointments,
+          [id]: appointment
+        };
+        setState({
+          ...state,
+          appointments
+        });
+
+
+      })
+      .catch((error) => console.log(error));
   }
+
+
 
   return (
     <main className="layout">
