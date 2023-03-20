@@ -14,7 +14,8 @@
   "scripts": {
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "storybook": "start-storybook -p 9009 -s public --ci"
+    "storybook": "start-storybook -p 9009 -s public --ci",
+    "cypress": "cypress open -P ."
   },
   "browserslist": {
     "production": [
